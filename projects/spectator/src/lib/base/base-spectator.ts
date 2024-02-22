@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { SpyObject } from '../mock';
 import { Token } from '../token';
+import { Injector, runInInjectionContext } from '@angular/core';
 
 /**
  * @internal
@@ -16,5 +17,9 @@ export abstract class BaseSpectator {
    */
   public flushEffects(): void {
     TestBed.flushEffects();
+  }
+
+  public runInInjectionContext<T>(cb: () => T): T {
+    return TestBed.runInInjectionContext(cb);
   }
 }
